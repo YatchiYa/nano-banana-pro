@@ -201,7 +201,7 @@ export default function AdvancedInterface({
           <div className="flex-1 overflow-y-auto p-4 space-y-3">
             {selectedImages.map((file, idx) => (
               <div key={idx} className="relative group">
-                <div className="aspect-square rounded-xl overflow-hidden border border-white/10 bg-gray-800">
+                <div className="aspect-square rounded-xl overflow-hidden border border-white/10 bg-gray-800 h-[300px]">
                   <img
                     src={URL.createObjectURL(file)}
                     alt="Reference"
@@ -435,7 +435,7 @@ export default function AdvancedInterface({
           </div>
 
           {/* Chat Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          {/* <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {messages.length === 0 && (
               <div className="flex flex-col items-center justify-center h-full text-center space-y-6">
                 <div className="w-20 h-20 bg-gradient-to-br from-slate-800 via-purple-900/50 to-slate-800 rounded-2xl flex items-center justify-center border border-white/10">
@@ -486,7 +486,7 @@ export default function AdvancedInterface({
               </div>
             )}
             <div ref={messagesEndRef} />
-          </div>
+          </div> */}
 
           {/* Messages Area - Text Only */}
           <div className="flex-1 overflow-y-auto p-4 border-b border-white/10">
