@@ -3,7 +3,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import MessageItem from './MessageItem';
 import InputArea from './InputArea';
 import AdvancedInterface from './AdvancedInterface';
-import { Settings, Zap, Palette, Layers, Sparkles } from 'lucide-react';
+import VideoChatInterface from './VideoChatInterface';
+import { Settings, Zap, Palette, Layers, Sparkles, Video } from 'lucide-react';
 
 interface Message {
   role: 'user' | 'model';
@@ -25,6 +26,7 @@ export default function ChatInterface() {
   const [isLoading, setIsLoading] = useState(false);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [isAdvancedMode, setIsAdvancedMode] = useState(false);
+  const [isVideoMode, setIsVideoMode] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const [generationOptions, setGenerationOptions] = useState<GenerationOptions>({
     difficulty: 'intermediate',
@@ -155,6 +157,15 @@ export default function ChatInterface() {
     }
   };
 
+  if (isVideoMode) {
+    return (
+      <VideoChatInterface
+        onModeToggle={() => setIsVideoMode(false)}
+        sessionId={sessionId}
+      />
+    );
+  }
+
   if (isAdvancedMode) {
     return (
       <AdvancedInterface
@@ -197,7 +208,16 @@ export default function ChatInterface() {
         </div>
         
         <div className="flex items-center gap-3">
-          {/* Mode Toggle */}
+          {/* Video Mode Toggle */}
+          <button
+            onClick={() => setIsVideoMode(true)}
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-600/20 to-blue-600/20 border border-cyan-500/30 text-cyan-300 hover:from-cyan-600/30 hover:to-blue-600/30 transition-all duration-300 hover:scale-105"
+          >
+            <Video className="w-4 h-4" />
+            <span className="text-sm font-medium">Video</span>
+          </button>
+
+          {/* Image Advanced Mode Toggle */}
           <button
             onClick={() => setIsAdvancedMode(true)}
             className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30 text-purple-300 hover:from-purple-600/30 hover:to-pink-600/30 transition-all duration-300 hover:scale-105"
